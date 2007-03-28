@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_recommends/admin/admin_recommends_inc.php,v 1.1 2007/03/28 01:01:05 nickpalmer Exp $
+// $Header: /cvsroot/bitweaver/_bit_recommends/admin/admin_recommends_inc.php,v 1.2 2007/03/28 15:18:36 nickpalmer Exp $
 // Copyright (c) 2005 bitweaver Recommends
 // All Rights Reserved. See copyright.txt for details and a complete list of authors.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
@@ -12,12 +12,27 @@ $gBitSmarty->assign( 'recommendsIconSizes', array( 48 => 'large', 36=>'medium', 
 $formRecommendsOptions = array(
 	"recommends_minimum_recommends" => array(
 		'label' => 'Minimum Level',
-		'note' => 'The minimum level of recommendations required before the content shows up in the recommends list.',
+		'note' => 'The minimum level of recommendations required before the content shows up in the recommends list',
+		'type' => 'input',
+	),
+	"recommends_max_changes" => array(
+		'label' => 'Max Changes',
+		'note' => 'The maximum number of changes a user can make to their recommendation.',
+		'type' => 'input',
+	),
+	"recommends_change_timeout" => array(
+		'label' => 'Change Timeout',
+		'note' => 'The maximum time after initial recommendation that the recommendation can be changed in minutes',
+		'type' => 'input',
+	),
+	"recommends_recommend_period" => array(
+		'label' => 'Recommend Period',
+		'note' => 'The time the content is open for recommendation in days',
 		'type' => 'input',
 	),
 	"recommends_timeout_days" => array(
 		'label' => 'Days Before Timeout',
-		'note' => 'The maximum number of days to show content in the recommends list.',
+		'note' => 'The maximum number of days to show content in the recommends list',
 		'type' => 'input',
 	),
 	"recommends_use_ajax" => array(
