@@ -1,9 +1,9 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_recommends/LibertyRecommends.php,v 1.2 2007/03/28 15:18:35 nickpalmer Exp $
+* $Header: /cvsroot/bitweaver/_bit_recommends/LibertyRecommends.php,v 1.3 2007/03/28 22:57:56 nickpalmer Exp $
 * date created 2006/02/10
 * @author xing <xing@synapse.plus.com>
-* @version $Revision: 1.2 $ $Date: 2007/03/28 15:18:35 $
+* @version $Revision: 1.3 $ $Date: 2007/03/28 22:57:56 $
 * @package recommends
 */
 
@@ -42,7 +42,7 @@ class LibertyRecommends extends LibertyBase {
 		if( $this->isValid() ) {
 			global $gBitSystem, $gBitUser;
 			$query = "
-				SELECT  lc.`created`, lc.`content_id`, rcms.`recommending`, rcms.`votes`, rcm.`recommending_time`, rcm.`changes`
+				SELECT  lc.`created`, lc.`content_id`, rcms.`recommending` AS recommends_recommending, rcms.`votes` AS recommends_votes, rcm.`recommending_time` AS recommends_time, rcm.`changes` AS recommends_changes, rcm.`recommending` AS recommends_user_recommending
 				FROM `".BIT_DB_PREFIX."liberty_content` lc
 				LEFT JOIN `".BIT_DB_PREFIX."recommends_sum` rcms ON (lc.`content_id` = rcms.`content_id`)
 				LEFT JOIN `".BIT_DB_PREFIX."recommends` rcm ON (lc.`content_id` = rcm.`content_id` AND rcm.`user_id` = ? )
@@ -96,7 +96,7 @@ class LibertyRecommends extends LibertyBase {
 
 		if( !empty( $pListHash['recommends'] ) ) {
 			$where .= empty( $where ) ? ' WHERE ' : ' AND ';
-			$where .= " rcm.recommending > ? ";
+			$where .= " rcm.recommending >= ? ";
 			$bindVars[] = $pListHash['recommends'];
 		}
 
@@ -105,7 +105,7 @@ class LibertyRecommends extends LibertyBase {
 			$where      .= " UPPER( lc.`title` ) LIKE ? ";
 			$bindVars[]  = '%'.strtoupper( $pListHash['find'] ).'%';
 		}
-
+		
 		$query = "
 			SELECT rcm.*, lch.`hits`, lch.`last_hit`, lc.`event_time`, lc.`title`,
 			lc.`last_modified`, lc.`content_type_guid`, lc.`ip`, lc.`created` $select
@@ -161,7 +161,7 @@ class LibertyRecommends extends LibertyBase {
 			$this->mInfo['display_url'] = $obj->getDisplayUrl();
 			if( $pExtras ) {
 				$query = "
-					SELECT rcm.`content_id` as `hash_key`, rcm.`recommending`, uu.`login`, uu.`real_name`
+					SELECT rcm.`content_id` as `hash_key`, rcm.`recommending`, uu.`login`, uu.`real_name`, uu.`user_id`
 					FROM `".BIT_DB_PREFIX."recommends` rcm
 						INNER JOIN `".BIT_DB_PREFIX."users_users` uu ON rcm.`user_id`=uu.`user_id`
 					WHERE rcm.`content_id`=?
@@ -218,7 +218,6 @@ class LibertyRecommends extends LibertyBase {
 			if( $this->getUserRecommending( $pParamHash['content_id'] )) {
 				$locId = array( "content_id" => $pParamHash['recommends_store']['content_id'], "user_id" => $pParamHash['recommends_store']['user_id'] );
 				unset($pParamHash['recommends_store']['recommending_time']);
-				$pParamHash['recommends_store']['changes'] = $changes;
 				$result = $this->mDb->associateUpdate( $table, $pParamHash['recommends_store'], $locId );
 				unset($locId['user_id']);
 				$pParamHash['recommends_sum_store']['content_id'] = $pParamHash['recommends_store']['content_id'];
@@ -238,7 +237,7 @@ class LibertyRecommends extends LibertyBase {
 					$result = $this->mDb->associateInsert( $table_sum, $pParamHash['recommends_sum_store'] );
 				}
 			}
-			$this->mDb->CompleteTrans();
+			$this->mDb->CompleteTrans();			
 		}
 		return( count( $this->mErrors )== 0 );
 	}
@@ -255,10 +254,10 @@ class LibertyRecommends extends LibertyBase {
 
 		if( $gBitUser->isRegistered() && $this->isValid() ) {
 			$this->load();
-			$timeout = $gBitSystem->getUTCTime() - ($gBitSystem->getConfig('recommends_recommend_period', 15) * 24 * 60 * 60);
-			$timeout_change = $gBitSystem->getUTCTime() - ($gBitSystem->getConfig('recommends_change_timeout', 1) * 60);
-			if( $this->mInfo['created'] > $timeout && (empty($this->mInfo['recommending_time']) || $this->mInfo['recommending_time']) > $timeout_change) {
-				if( empty($this->mInfo['changes']) || $this->mInfo['changes'] < $gBitSystem->getConfig('recommends_max_changes', 1) ) {
+			$timeout = $gBitSystem->getUTCTime() - ($gBitSystem->getConfig('recommends_recommend_period', 15) * RECOMMENDS_PERIOD_SCALE);
+			$timeout_change = $gBitSystem->getUTCTime() - ($gBitSystem->getConfig('recommends_change_timeout', 1) * RECOMMENDS_TIMEOUT_CHANGE_SCALE);
+			if( $this->mInfo['created'] > $timeout && (empty($this->mInfo['recommends_time']) || $this->mInfo['recommends_time'] > $timeout_change)) {
+				if( empty($this->mInfo['recommends_changes']) || $this->mInfo['recommends_changes'] < $gBitSystem->getConfig('recommends_max_changes', 1) ) {
 					$pParamHash['content_id'] = $this->mContentId;
 					$pParamHash['recommending'] = $pParamHash['recommends_recommending'];
 					if( ($pParamHash['recommending'] == 1 || $pParamHash['recommending'] == -1 || $pParamHash['recommending'] == 0) && $this->isValid() ) {			  	
@@ -267,7 +266,7 @@ class LibertyRecommends extends LibertyBase {
 						$pParamHash['recommends_store']['recommending']      = ( int )$pParamHash['recommending'];
 						$pParamHash['recommends_store']['recommending_time'] = ( int )BitDate::getUTCTime();
 						$pParamHash['recommends_store']['user_id']     = ( int )$gBitUser->mUserId;
-						$pParamHash['recommends_store']['changes']     = empty($this->mInfo['changes']) ? 0 : $this->mInfo['changes'] + 1;
+						$pParamHash['recommends_store']['changes']     = !isset($this->mInfo['recommends_changes']) ? 0 : $this->mInfo['recommends_changes'] + 1;
 					} else {
 						$this->mErrors['recommending_bad'] = tra("Invalid recommendation.");
 					}

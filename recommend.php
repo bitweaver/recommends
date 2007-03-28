@@ -1,9 +1,9 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_recommends/recommend.php,v 1.2 2007/03/28 15:18:36 nickpalmer Exp $
+* $Header: /cvsroot/bitweaver/_bit_recommends/recommend.php,v 1.3 2007/03/28 22:57:57 nickpalmer Exp $
 * date created 2006/02/10
 * @author xing <xing@synapse.plus.com>
-* @version $Revision: 1.2 $ $Date: 2007/03/28 15:18:36 $
+* @version $Revision: 1.3 $ $Date: 2007/03/28 22:57:57 $
 * @package recommends
 */
 
@@ -27,21 +27,21 @@ if( @BitBase::verifyId( $_REQUEST['content_id'] ) && isset( $_REQUEST['recommend
 				if( $recommends->store( $_REQUEST ) ) {
 					//$recommendsfeed['success'] = tra( "Thank you for recommending." );
 				} else {
-					$recommendsfeed['error'] = $recommends->mErrors;
+					$recommendsfeed['error'] = $recommends->mErrors;					
 				}
 			}
 		}
 	}
 	// get up to date reading
 	$recommends->load();
-	$serviceHash = array_merge( $tmpObject->mInfo, $recommends->mInfo, $recommends->getUserRecommending( $tmpObject->mContentId ) );
+	$serviceHash = array_merge( $tmpObject->mInfo, $recommends->mInfo);
 	$gBitSmarty->assign( 'serviceHash', $serviceHash );
 } else {
 	$recommendsfeed['error'] = array('recommending_bad' => tra( "There was a problem trying to recommend." ));
 }
 $gBitSmarty->assign( "recommendsfeed", $recommendsfeed );
 if( $gBitSystem->isAjaxRequest() ) {
-	echo $gBitSmarty->fetch( 'bitpackage:recommends/recommends_inline_service.tpl' );
+	echo ( $gBitSmarty->fetch( 'bitpackage:recommends/recommends_inline_service.tpl' ) );
 } elseif( !empty( $tmpObject ) ) {
 	header( "Location:".$tmpObject->getDisplayUrl() );
 	die;

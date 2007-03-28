@@ -47,7 +47,8 @@
 						<ul class="data">
 							{foreach from=$recommendsDetails.user_recommendings item=user}
 								<li class="item {cycle values="odd,even"}">
-									{displayname hash=$user} &bull; {if $user.recommending == 1}Recommended{else}Recommended Avoid{/if}
+{debug}
+									<a href="{$smarty.const.RECOMMENDS_PKG_URL}details.php?user_id={$user.user_id}" title="User Recommendations">{displayname hash=$user nolink=1}</a> &bull; {if $user.recommending == 1}Recommended{else}Recommended Avoid{/if}
 								</li>
 							{/foreach}
 						</ul>
@@ -58,12 +59,11 @@
 
 				<div class="row">
 					{formlabel label="Individual Recommendings" for=""}
-{debug}
 					{forminput}
 						<ul class="data">
 							{foreach from=$userRecommendings item=recommending}
 								<li class="item {cycle values="odd,even"}">
-									{$recommending.display_link} &bull; {$recommending.user_recommending}
+									{$recommending.display_link} &bull; {if $recommending.user_recommending == 1}Recommended{else}Recommended Avoid{/if}
 								</li>
 							{/foreach}
 						</ul>

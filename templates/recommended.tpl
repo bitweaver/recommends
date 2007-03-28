@@ -21,7 +21,7 @@
 				{foreach from=$recommendedContent item=content}
 					<tr class="{cycle values="even,odd"}">
 						<td><a href="{$content.display_url}" title="{$content.title|escape}">{$content.title|escape}</a></td>
-						<td>{$content.recommending} in {$content.votes} votes</td>
+						<td><a href="{$smarty.const.RECOMMENDS_PKG_URL}details.php?content_id={$content.content_id}" title="{tr}Details{/tr}">{$content.recommending} in {$content.votes} votes</a></td>
 						<td>{$content.created|bit_short_date}</td>
 					</tr>
 				{foreachelse}
