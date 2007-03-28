@@ -47,7 +47,6 @@
 						<ul class="data">
 							{foreach from=$recommendsDetails.user_recommendings item=user}
 								<li class="item {cycle values="odd,even"}">
-{debug}
 									<a href="{$smarty.const.RECOMMENDS_PKG_URL}details.php?user_id={$user.user_id}" title="User Recommendations">{displayname hash=$user nolink=1}</a> &bull; {if $user.recommending == 1}Recommended{else}Recommended Avoid{/if}
 								</li>
 							{/foreach}
