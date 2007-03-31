@@ -1,9 +1,9 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_recommends/LibertyRecommends.php,v 1.3 2007/03/28 22:57:56 nickpalmer Exp $
+* $Header: /cvsroot/bitweaver/_bit_recommends/LibertyRecommends.php,v 1.4 2007/03/31 21:10:09 nickpalmer Exp $
 * date created 2006/02/10
 * @author xing <xing@synapse.plus.com>
-* @version $Revision: 1.3 $ $Date: 2007/03/28 22:57:56 $
+* @version $Revision: 1.4 $ $Date: 2007/03/31 21:10:09 $
 * @package recommends
 */
 
@@ -11,6 +11,10 @@
  * Setup
  */
 require_once( KERNEL_PKG_PATH.'BitBase.php' );
+
+define('RECOMMENDS_PERIOD_SCALE', 3600); // 60 * 60
+define('RECOMMENDS_TIMEOUT_CHANGE_SCALE', 60);
+define('RECOMMENDS_TIMEOUT_DAYS_SCALE', 86400); // 24 * 60 * 60
 
 /**
  * Liberty Recommends
@@ -412,6 +416,9 @@ function recommends_content_load_sql( &$pObject ) {
 				ON ( lc.`content_id`=rcms.`content_id` )
 			LEFT JOIN `".BIT_DB_PREFIX."recommends` rcm
 				ON ( lc.`content_id`=rcm.`content_id` AND rcm.`user_id`='".$gBitUser->mUserId."' )";
+		$dt = $gBitSystem->getUTCTime();
+		$gBitSmarty->assign('recommends_user_timeout', $dt - ($gBitSystem->getConfig('recommends_change_timeout', 1) * RECOMMENDS_TIMEOUT_CHANGE_SCALE));
+		$gBitSmarty->assign('recommends_timeout', $dt - ($gBitSystem->getConfig('recommends_recommend_period', 15) * RECOMMENDS_PERIOD_SCALE));
 		return $ret;
 	}
 }

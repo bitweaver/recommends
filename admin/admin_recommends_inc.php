@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_recommends/admin/admin_recommends_inc.php,v 1.2 2007/03/28 15:18:36 nickpalmer Exp $
+// $Header: /cvsroot/bitweaver/_bit_recommends/admin/admin_recommends_inc.php,v 1.3 2007/03/31 21:10:10 nickpalmer Exp $
 // Copyright (c) 2005 bitweaver Recommends
 // All Rights Reserved. See copyright.txt for details and a complete list of authors.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
@@ -27,7 +27,7 @@ $formRecommendsOptions = array(
 	),
 	"recommends_recommend_period" => array(
 		'label' => 'Recommend Period',
-		'note' => 'The time the content is open for recommendation in days',
+		'note' => 'The time the content is open for recommendation in hours',
 		'type' => 'input',
 	),
 	"recommends_timeout_days" => array(

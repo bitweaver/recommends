@@ -41,7 +41,7 @@ $gBitInstaller->registerPreferences( RECOMMENDS_PKG_NAME, array(
 	array( RECOMMENDS_PKG_NAME, "recommends_timeout_days", "15"),
 	array( RECOMMENDS_PKG_NAME, "recommends_max_changes", "1"),
 	array( RECOMMENDS_PKG_NAME, "recommends_change_timeout", "1"),
-	array( RECOMMENDS_PKG_NAME, "recommends_recommend_period", "15"),
+	array( RECOMMENDS_PKG_NAME, "recommends_recommend_period", "48"),
 	array( RECOMMENDS_PKG_NAME, "recommends_minimum_recommends", "10" ),
 	array( RECOMMENDS_PKG_NAME, "recommends_icon_width", "48" ),
 ) );

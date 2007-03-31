@@ -7,7 +7,7 @@ $gBitSystem->verifyPackage( 'recommends' );
 $recommends = new LibertyRecommends();
 
 $listHash = $_REQUEST;
-$listHash['timeout'] = $gBitSystem->getUTCTime() - ($gBitSystem->getConfig('recommends_timout_days', 15) * 24 * 60 * 60);
+$listHash['timeout'] = $gBitSystem->getUTCTime() - ($gBitSystem->getConfig('recommends_timout_days', 15) * RECOMMENDS_TIMEOUT_DAYS_SCALE);
 $listHash['recommends'] = $gBitSystem->getConfig('recommends_minimum_recommends', '10');
 $recommendedContent = $recommends->getList( $listHash );
 
