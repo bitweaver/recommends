@@ -9,7 +9,6 @@ $registerHash = array(
 $gBitSystem->registerPackage( $registerHash );
 
 if( $gBitSystem->isPackageActive( 'recommends' ) ) {
-print_r ('active biotch');
 	require_once( RECOMMENDS_PKG_PATH.'LibertyRecommends.php' );
 
 	// if we are using a text browser theme, make sure not to use ajax
