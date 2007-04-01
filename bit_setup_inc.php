@@ -9,6 +9,7 @@ $registerHash = array(
 $gBitSystem->registerPackage( $registerHash );
 
 if( $gBitSystem->isPackageActive( 'recommends' ) ) {
+print_r ('active biotch');
 	require_once( RECOMMENDS_PKG_PATH.'LibertyRecommends.php' );
 
 	// if we are using a text browser theme, make sure not to use ajax
@@ -29,7 +30,9 @@ if( $gBitSystem->isPackageActive( 'recommends' ) ) {
 		'content_load_sql_function' => 'recommends_content_load_sql',
 		'content_list_sql_function' => 'recommends_content_list_sql',
 		'content_expunge_function'  => 'recommends_content_expunge',
-		'content_body_tpl'          => 'bitpackage:recommends/recommends_inline_service.tpl',
+		'content_view_tpl'          => 'bitpackage:recommends/view_recommends_view.tpl',
+		'content_nav_tpl'           => 'bitpackage:recommends/view_recommends_nav.tpl',
+		'content_body_tpl'          => 'bitpackage:recommends/view_recommends_body.tpl',
 		//		'content_list_sort_tpl'     => 'bitpackage:recommends/recommends_list_sort_service.tpl',
 		//		'content_list_tpl'          => 'bitpackage:recommends/recommends_list_service.tpl',
 	) );

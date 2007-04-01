@@ -38,6 +38,9 @@ $gBitInstaller->registerUserPermissions( RECOMMENDS_PKG_NAME, array(
 // ### Default Preferences
 $gBitInstaller->registerPreferences( RECOMMENDS_PKG_NAME, array(
 	//array( RECOMMENDS_PKG_NAME, "recommends_display_width", "125" ),
+	array( RECOMMENDS_PKG_NAME, "recommends_in_body", "y" ),
+	//array( RECOMMENDS_PKG_NAME, "recommends_in_view", "n" ),
+	//array( RECOMMENDS_PKG_NAME, "recommends_in_nav", "n" ),
 	array( RECOMMENDS_PKG_NAME, "recommends_timeout_days", "15"),
 	array( RECOMMENDS_PKG_NAME, "recommends_max_changes", "1"),
 	array( RECOMMENDS_PKG_NAME, "recommends_change_timeout", "1"),

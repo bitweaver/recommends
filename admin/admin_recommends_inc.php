@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_recommends/admin/admin_recommends_inc.php,v 1.3 2007/03/31 21:10:10 nickpalmer Exp $
+// $Header: /cvsroot/bitweaver/_bit_recommends/admin/admin_recommends_inc.php,v 1.4 2007/04/01 19:31:11 wjames5 Exp $
 // Copyright (c) 2005 bitweaver Recommends
 // All Rights Reserved. See copyright.txt for details and a complete list of authors.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
@@ -8,6 +8,26 @@ require_once( RECOMMENDS_PKG_PATH.'LibertyRecommends.php' );
 $gBitSmarty->assign_by_ref( 'feedback', $feedback = array() );
 
 $gBitSmarty->assign( 'recommendsIconSizes', array( 48 => 'large', 36=>'medium', 24=>'small') );
+
+$formRecommendsDisplayOptions = array(
+	"recommends_in_view" => array(
+		'label' => 'Recommends In View',
+		'note' => 'Shows the Recommendation buttons in the "view" location',
+		'type' => 'toggle',
+	),
+	"recommends_in_nav" => array(
+		'label' => 'Recommends In Nav',
+		'note' => 'Shows the Recommendation buttons in the "nav" location',
+		'type' => 'toggle',
+	),
+	"recommends_in_body" => array(
+		'label' => 'Recommends In Body',
+		'note' => 'Shows the Recommendation buttons in the "body" location',
+		'type' => 'toggle',
+	),
+);
+$gBitSmarty->assign( 'formRecommendsDisplayOptions', $formRecommendsDisplayOptions );
+
 
 $formRecommendsOptions = array(
 	"recommends_minimum_recommends" => array(
@@ -52,7 +72,8 @@ foreach( $gLibertySystem->mContentTypes as $cType ) {
 }
 
 if( !empty( $_REQUEST['recommends_preferences'] ) ) {
-	$recommends = $formRecommendsOptions;
+	$recommends = array_merge($formRecommendsDisplayOptions, $formRecommendsOptions);
+//	$recommends = $formRecommendsOptions;
 	foreach( $recommends as $item => $data ) {
 		if( $data['type'] == 'numeric' ) {
 			simple_set_int( $item, RECOMMENDS_PKG_NAME );
