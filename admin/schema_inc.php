@@ -32,7 +32,8 @@ $gBitInstaller->registerPackageInfo( RECOMMENDS_PKG_NAME, array(
 
 // ### Default UserPermissions
 $gBitInstaller->registerUserPermissions( RECOMMENDS_PKG_NAME, array(
-	array( 'p_recommends_send', 'Can make recommendations', 'registered',  RECOMMENDS_PKG_NAME ),
+// Not yet supported in code and never supported for annonymous.
+//	array( 'p_recommends_send', 'Can make recommendations', 'registered',  RECOMMENDS_PKG_NAME ),
 ) );
 
 // ### Default Preferences

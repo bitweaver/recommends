@@ -5,8 +5,23 @@
 		<h1>{tr}Recommends{/tr}</h1>
 	</div>
 	<div class="body">
-		{minifind sort_mode=$sort_mode}
+	{form legend="Select Content Type"}
+		<div class="row">
+			{formlabel label="Restrict listing" for="content_type"}
+			{forminput}
+				{html_options onchange="submit();" options=$contentTypes name=content_type id=content_type selected=$contentSelect}
+				<noscript>
+					<div><input type="submit" name="content_switch" value="{tr}change content type{/tr}" /></div>
+				</noscript>
+			{/forminput}
 
+			{forminput}
+				<input type="text" name="find" value="{$listInfo.find}" />
+				<input type="submit" value="{tr}Apply Filter{/tr}" name="search_objects" />
+				{formhelp note="You can restrict the content listing to a given content type or apply a filter."}
+			{/forminput}
+		</div>
+	{/form}
 		{form id="checkform"}
 			<input type="hidden" name="offset" value="{$control.offset|escape}" />
 			<input type="hidden" name="sort_mode" value="{$control.sort_mode|escape}" />
