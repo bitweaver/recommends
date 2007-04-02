@@ -1,9 +1,9 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_recommends/LibertyRecommends.php,v 1.4 2007/03/31 21:10:09 nickpalmer Exp $
+* $Header: /cvsroot/bitweaver/_bit_recommends/LibertyRecommends.php,v 1.5 2007/04/02 13:20:07 nickpalmer Exp $
 * date created 2006/02/10
 * @author xing <xing@synapse.plus.com>
-* @version $Revision: 1.4 $ $Date: 2007/03/31 21:10:09 $
+* @version $Revision: 1.5 $ $Date: 2007/04/02 13:20:07 $
 * @package recommends
 */
 
@@ -108,6 +108,19 @@ class LibertyRecommends extends LibertyBase {
 			$where      .= empty( $where ) ? ' WHERE ' : ' AND ';
 			$where      .= " UPPER( lc.`title` ) LIKE ? ";
 			$bindVars[]  = '%'.strtoupper( $pListHash['find'] ).'%';
+		}
+
+		if ( !empty( $pListHash['content_type'] ) ) {
+			if( is_array( $pListHash['content_type'] ) ) {			
+				$where      .= empty( $where ) ? ' WHERE ' : ' AND ';
+				$where .= " lc.`content_type_guid` IN( ".implode( ',',array_fill( 0,count( $pListHash['content_type'] ),'?' ) )." )";
+				$bindVars = array_merge ( $bindVars, $pListHash['content_type_guid'] );
+			}
+			else {
+				$where      .= empty( $where ) ? ' WHERE ' : ' AND ';
+				$where .= " lc.`content_type_guid` = ? ";
+				$bindVars[] = $pListHash['content_type'];
+			}
 		}
 		
 		$query = "
