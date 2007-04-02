@@ -13,12 +13,17 @@ $recommendedContent = $recommends->getList( $listHash );
 
 $gBitSmarty->assign( 'recommendedContent', $recommendedContent );
 $gBitSmarty->assign( 'listInfo', $listHash['listInfo'] );
+$contentType = 'Content';
 $contentTypes = array( '' => 'All Content' );
 foreach( $gLibertySystem->mContentTypes as $cType ) {
 	if( $gBitSystem->getConfig( 'recommends_recommend_'.$cType['content_type_guid'] ) ) {
 		$contentTypes[$cType['content_type_guid']] = $cType['content_description'];
+		if (isset($_REQUEST['content_type']) && $_REQUEST['content_type'] == $cType['content_type_guid']){
+			$contentType = $cType['content_description']."s";
+		}
 	}
 }
 $gBitSmarty->assign( 'contentTypes', $contentTypes );
+$gBitSmarty->assign( 'contentType', $contentType);
 $gBitSystem->display( 'bitpackage:recommends/recommended.tpl', tra( 'Recommended Content' ) );
 ?>

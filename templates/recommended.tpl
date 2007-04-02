@@ -2,7 +2,7 @@
 <div class="floaticon">{bithelp}</div>
 <div class="listing recommends">
 	<div class="header">
-		<h1>{tr}Recommends{/tr}</h1>
+		<h1>{tr}Recommended{/tr} {$contentType}</h1>
 	</div>
 	<div class="body">
 	{form legend="Select Content Type"}
