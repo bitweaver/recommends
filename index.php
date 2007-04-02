@@ -24,6 +24,7 @@ foreach( $gLibertySystem->mContentTypes as $cType ) {
 	}
 }
 $gBitSmarty->assign( 'contentTypes', $contentTypes );
+$gBitSmarty->assign_by_ref( 'listInfo', $_REQUEST['listInfo'] ); 
 $gBitSmarty->assign( 'contentType', $contentType);
 $gBitSystem->display( 'bitpackage:recommends/recommended.tpl', tra( 'Recommended Content' ) );
 ?>

@@ -1,9 +1,9 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_recommends/LibertyRecommends.php,v 1.7 2007/04/02 15:05:26 wjames5 Exp $
+* $Header: /cvsroot/bitweaver/_bit_recommends/LibertyRecommends.php,v 1.8 2007/04/02 15:25:01 nickpalmer Exp $
 * date created 2006/02/10
 * @author xing <xing@synapse.plus.com>
-* @version $Revision: 1.7 $ $Date: 2007/04/02 15:05:26 $
+* @version $Revision: 1.8 $ $Date: 2007/04/02 15:25:01 $
 * @package recommends
 */
 
@@ -78,7 +78,7 @@ class LibertyRecommends extends LibertyBase {
 			$order = " ORDER BY ".$this->mDb->convertSortmode( $pListHash['sort_mode'] )." ";
 		} else {
 			// set a default sort_mode
-			$order = " ORDER BY rcm.`recommending` DESC";
+			$order = " ORDER BY rcm.`qualified_time` DESC";
 		}
 
 		LibertyContent::prepGetList( $pListHash );
@@ -94,7 +94,7 @@ class LibertyRecommends extends LibertyBase {
 
 		if( !empty( $pListHash['timeout'] ) ) {
 			$where	.= empty( $where) ? ' WHERE ' : ' AND ';
-			$where	.= " lc.`created` >= ? ";
+			$where	.= " rcm.`qualified_time` >= ? ";
 			$bindVars[] = $pListHash['timeout'];
 		}
 
@@ -149,7 +149,7 @@ class LibertyRecommends extends LibertyBase {
 
 		$query = "
 			SELECT COUNT( rcm.`content_id` )
-			FROM `".BIT_DB_PREFIX."recommends` rcm
+			FROM `".BIT_DB_PREFIX."recommends_sum` rcm
 				INNER JOIN `".BIT_DB_PREFIX."liberty_content` lc ON ( lc.`content_id` = rcm.`content_id` )
 				LEFT JOIN `".BIT_DB_PREFIX."liberty_content_hits` lch ON ( lc.`content_id` = lch.`content_id` )
 			$join $where";
@@ -241,12 +241,18 @@ class LibertyRecommends extends LibertyBase {
 				$pParamHash['recommends_sum_store']['content_id'] = $pParamHash['recommends_store']['content_id'];
 				$pParamHash['recommends_sum_store']['recommending'] = $this->mDb->getOne("SELECT SUM(`recommending`) FROM ".$table." WHERE `content_id` = ? ", array($pParamHash['recommends_sum_store']['content_id']));
 				$pParamHash['recommends_sum_store']['votes'] = $this->mDb->getOne("SELECT COUNT(`recommending`) FROM ".$table." WHERE `content_id` = ? AND recommending != 0", array($pParamHash['recommends_sum_store']['content_id']));
+				if ($pParamHash['recommends_sum_store']['votes'] == $gBitSystem->getConfig('recommends_minimum_recommends', 10)) {
+					$pParamHash['recommends_sum_store']['qualified_time'] = $gBitSystem->getUTCTime();
+				}
 				$result = $this->mDb->associateUpdate( $table_sum, $pParamHash['recommends_sum_store'], $locId);
 			} else {
 				$result = $this->mDb->associateInsert( $table, $pParamHash['recommends_store'] );
 				$pParamHash['recommends_sum_store']['content_id'] = $pParamHash['recommends_store']['content_id'];
 				$pParamHash['recommends_sum_store']['recommending'] = $this->mDb->getOne("SELECT SUM(recommending) FROM ".$table." WHERE `content_id` = ? ", array($pParamHash['recommends_store']['content_id']));
 				$pParamHash['recommends_sum_store']['votes'] = $this->mDb->getOne("SELECT COUNT(`recommending`) FROM ".$table." WHERE `content_id` = ? AND recommending != 0", array($pParamHash['recommends_sum_store']['content_id']));
+				if ($pParamHash['recommends_sum_store']['votes'] == $gBitSystem->getConfig('recommends_minimum_recommends', 10)) {
+					$pParamHash['recommends_sum_store']['qualified_time'] = $gBitSystem->getUTCTime();
+				}
 				
 				if ($this->getRecommending( $pParamHash['content_id'] ) ) {
 					$result = $this->mDb->associateUpdate( $table_sum, $pParamHash['recommends_sum_store'], array('content_id' => $pParamHash['recommends_sum_store']['content_id']));

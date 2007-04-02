@@ -3,6 +3,7 @@ $tables = array(
 	'recommends_sum' => "
 		content_id I4 PRIMARY,
 		recommending I2 NOTNULL,
+		qualified_time I8 default 0,
 		votes I4 NOTNULL
 		CONSTRAINT '
 			, CONSTRAINT `recommends_sum_content_ref` FOREIGN KEY (`content_id`) REFERENCES `".BIT_DB_PREFIX."liberty_content`( `content_id` )'
