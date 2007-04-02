@@ -1,9 +1,9 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_recommends/LibertyRecommends.php,v 1.5 2007/04/02 13:20:07 nickpalmer Exp $
+* $Header: /cvsroot/bitweaver/_bit_recommends/LibertyRecommends.php,v 1.7 2007/04/02 15:05:26 wjames5 Exp $
 * date created 2006/02/10
 * @author xing <xing@synapse.plus.com>
-* @version $Revision: 1.5 $ $Date: 2007/04/02 13:20:07 $
+* @version $Revision: 1.7 $ $Date: 2007/04/02 15:05:26 $
 * @package recommends
 */
 
@@ -125,9 +125,10 @@ class LibertyRecommends extends LibertyBase {
 		
 		$query = "
 			SELECT rcm.*, lch.`hits`, lch.`last_hit`, lc.`event_time`, lc.`title`,
-			lc.`last_modified`, lc.`content_type_guid`, lc.`ip`, lc.`created` $select
+			lc.`last_modified`, lc.`content_type_guid`, lc.`ip`, lc.`created`, uu.`email`, uu.`login`, uu.`real_name` $select
 			FROM `".BIT_DB_PREFIX."recommends_sum` rcm
 				INNER JOIN `".BIT_DB_PREFIX."liberty_content` lc ON ( lc.`content_id` = rcm.`content_id` )
+				INNER JOIN		`".BIT_DB_PREFIX."users_users`			 uu ON ( uu.`user_id`			   = lc.`user_id` )
 				LEFT JOIN `".BIT_DB_PREFIX."liberty_content_hits` lch ON ( lc.`content_id` = lch.`content_id` )
 			$join $where $order";
 		$result = $this->mDb->query( $query, $bindVars, $pListHash['max_records'], $pListHash['offset'] );
