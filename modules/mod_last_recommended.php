@@ -9,7 +9,8 @@ if( !defined( 'MAX_RECOMMENDS_PREVIEW_LENGTH' ) ) {
 include_once( RECOMMENDS_PKG_PATH.'LibertyRecommends.php' );
 require_once( USERS_PKG_PATH.'BitUser.php' );
 
-global $gBitSmarty, $gQueryUserId, $module_rows, $module_params, $gBitSystem;
+// moduleParams contains lots of goodies: extract for easier handling
+extract( $moduleParams );
 
 $listHash = array( 'user_id' => $gQueryUserId, 'max_records' => $module_rows, 'parse_data' => TRUE );
 if ( isset($module_params['content_type']) ){ $listHash['content_type'] = $module_params['content_type'];}
@@ -18,9 +19,6 @@ $listHash['recommends'] = $gBitSystem->getConfig('recommends_minimum_recommends'
 
 $recommend = new LibertyRecommends();
 $ranking = $recommend->getList( $listHash );
-
-$gBitThemes = new BitThemes();
-$modParams = $gBitThemes->getModuleParameters('bitpackage:recommends/mod_last_recommended.tpl', $gQueryUserId);
 
 $maxPreviewLength = (!empty($modParams['max_preview_length']) ? $modParams['max_preview_length'] : MAX_RECOMMENDS_PREVIEW_LENGTH);
 
