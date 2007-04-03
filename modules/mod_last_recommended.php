@@ -5,7 +5,8 @@ include_once( RECOMMENDS_PKG_PATH.'LibertyRecommends.php' );
 extract( $moduleParams );
 
 $listHash = array(
-	'user_id'      => $gQueryUserId,
+	//user_id can not be used here cause it picks up the value from whomever is browsing. This needs to be changed to a unique prop like user and the getList method needs to change to recognize it. See bitblogpost.php and blog post module for an example -wjames5
+	//'user_id'      => $gQueryUserId,
 	'max_records'  => $moduleParams['module_rows'],
 	'parse_data'   => TRUE,
 	'content_type' => !empty( $module_params['content_type'] ) ? $module_params['content_type'] : NULL,
