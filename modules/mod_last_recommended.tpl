@@ -4,7 +4,7 @@
 		<ul class="data">
 			{section name=ix loop=$modLastRecommends}
 				<li class="{cycle values="odd,even"}">
-					<div class="title">{$modLastRecommends[ix].title}</div>
+					<div class="title"><a href="{$modLastRecommends[ix].display_url}">{$modLastRecommends[ix].title}</a></div>
 					<div class="date">{$modLastRecommends[ix].created|bit_long_date}
 					<br />
 					by {displayname hash=$modLastRecommends[ix]}</div>
