@@ -1,5 +1,5 @@
 <?php
-global $gBitSystem, $gBitSmarty, $gPreviewStyle;
+global $gBitSystem, $gBitSmarty, $gBitThemes;
 
 $registerHash = array(
 	'package_name' => 'recommends',
@@ -12,7 +12,7 @@ if( $gBitSystem->isPackageActive( 'recommends' ) ) {
 	require_once( RECOMMENDS_PKG_PATH.'LibertyRecommends.php' );
 
 	// if we are using a text browser theme, make sure not to use ajax
-	if( $gPreviewStyle == 'lynx' ) {
+	if( $gBitThemes->getStyle()  == 'lynx' ) {
 		$gBitSystem->setConfig( 'recommends_use_ajax', FALSE );
 	}
 
