@@ -1,4 +1,13 @@
 <?php
+/**
+ * @version $Header: /cvsroot/bitweaver/_bit_recommends/modules/mod_last_recommended.php,v 1.6 2007/06/22 10:16:46 lsces Exp $
+ * @package recommends
+ * @subpackage modules
+ */
+
+/**
+ * Initial Setup
+ */
 include_once( RECOMMENDS_PKG_PATH.'LibertyRecommends.php' );
 
 // moduleParams contains lots of goodies: extract for easier handling
