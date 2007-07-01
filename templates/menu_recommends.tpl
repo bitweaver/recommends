@@ -1,5 +1,5 @@
 {strip}
 	<ul>
-		<li><a class="item" href="{$smarty.const.RECOMMENDS_PKG_URL}index.php">{biticon ipackage="icons" iname="format-justify-fill" iexplain="List Recommendations" iforce="icon"} {tr}Recommendations{/tr}</a></li>
+		<li><a class="item" href="{$smarty.const.RECOMMENDS_PKG_URL}index.php">{biticon iname="format-justify-fill" iexplain="Recommendations" ilocation=menu}</a></li>
 	</ul>
 {/strip}
