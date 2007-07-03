@@ -1,5 +1,5 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_recommends/admin/admin_recommends_inc.php,v 1.4 2007/04/01 19:31:11 wjames5 Exp $
+// $Header: /cvsroot/bitweaver/_bit_recommends/admin/admin_recommends_inc.php,v 1.5 2007/07/03 16:43:05 nickpalmer Exp $
 // Copyright (c) 2005 bitweaver Recommends
 // All Rights Reserved. See copyright.txt for details and a complete list of authors.
 // Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
@@ -47,17 +47,17 @@ $formRecommendsOptions = array(
 	),
 	"recommends_recommend_period" => array(
 		'label' => 'Recommend Period',
-		'note' => 'The time the content is open for recommendation in hours',
+		'note' => 'The time the content is open for recommendation in hours. Set to 0 for no timeout.',
 		'type' => 'input',
 	),
 	"recommends_timeout_days" => array(
 		'label' => 'Days Before Timeout',
-		'note' => 'The maximum number of days to show content in the recommends list',
+		'note' => 'The maximum number of days to show content in the recommends list. Set to 0 for no timeout.',
 		'type' => 'input',
 	),
 	"recommends_use_ajax" => array(
 		'label' => 'Use Ajax',
-		'note' => 'Choosing this option will decrease load times when rating, however requires modern browsers with javascript enabled to allow for recommendations.',
+		'note' => 'Choosing this option will decrease load times when recommending, however requires modern browsers with javascript enabled to allow for recommendations.',
 		'type' => 'toggle',
 	),
 );

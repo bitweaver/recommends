@@ -1,9 +1,9 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_recommends/LibertyRecommends.php,v 1.8 2007/04/02 15:25:01 nickpalmer Exp $
+* $Header: /cvsroot/bitweaver/_bit_recommends/LibertyRecommends.php,v 1.9 2007/07/03 16:43:05 nickpalmer Exp $
 * date created 2006/02/10
 * @author xing <xing@synapse.plus.com>
-* @version $Revision: 1.8 $ $Date: 2007/04/02 15:25:01 $
+* @version $Revision: 1.9 $ $Date: 2007/07/03 16:43:05 $
 * @package recommends
 */
 
@@ -280,7 +280,7 @@ class LibertyRecommends extends LibertyBase {
 			$this->load();
 			$timeout = $gBitSystem->getUTCTime() - ($gBitSystem->getConfig('recommends_recommend_period', 15) * RECOMMENDS_PERIOD_SCALE);
 			$timeout_change = $gBitSystem->getUTCTime() - ($gBitSystem->getConfig('recommends_change_timeout', 1) * RECOMMENDS_TIMEOUT_CHANGE_SCALE);
-			if( $this->mInfo['created'] > $timeout && (empty($this->mInfo['recommends_time']) || $this->mInfo['recommends_time'] > $timeout_change)) {
+			if( (!$gBitSystem->isFeatureActive('recommends_recommend_period') || $this->mInfo['created'] > $timeout) && (empty($this->mInfo['recommends_time']) || $this->mInfo['recommends_time'] > $timeout_change)) {
 				if( empty($this->mInfo['recommends_changes']) || $this->mInfo['recommends_changes'] < $gBitSystem->getConfig('recommends_max_changes', 1) ) {
 					$pParamHash['content_id'] = $this->mContentId;
 					$pParamHash['recommending'] = $pParamHash['recommends_recommending'];
@@ -438,7 +438,10 @@ function recommends_content_load_sql( &$pObject ) {
 				ON ( lc.`content_id`=rcm.`content_id` AND rcm.`user_id`='".$gBitUser->mUserId."' )";
 		$dt = $gBitSystem->getUTCTime();
 		$gBitSmarty->assign('recommends_user_timeout', $dt - ($gBitSystem->getConfig('recommends_change_timeout', 1) * RECOMMENDS_TIMEOUT_CHANGE_SCALE));
-		$gBitSmarty->assign('recommends_timeout', $dt - ($gBitSystem->getConfig('recommends_recommend_period', 15) * RECOMMENDS_PERIOD_SCALE));
+
+		if ( $gBitSystem->isFeatureActive('recommends_recommend_period') ) {
+			$gBitSmarty->assign('recommends_timeout', $dt - ($gBitSystem->getConfig('recommends_recommend_period', 15) * RECOMMENDS_PERIOD_SCALE));
+		}
 		return $ret;
 	}
 }

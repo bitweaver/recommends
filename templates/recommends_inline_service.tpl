@@ -37,7 +37,7 @@ javascript:ajax_updater($('{$divid}'), '{$smarty.const.RECOMMENDS_PKG_URL}recomm
 		<script type="text/javascript">/*<![CDATA[*/ show_spinner('spinner'); /*]]>*/</script>
 	{/if}
 	<div class="recommends-container" id="{$divid}" >				
-	{if $gBitUser->isRegistered() && (empty($serviceHash.recommends_changes) || $serviceHash.recommends_changes < $gBitSystem->getConfig('recommends_max_changes', 1)) && (empty($serviceHash.recommends_time) || $serviceHash.recommends_time > $recommends_user_timeout) && $serviceHash.created > $recommends_timeout }
+	{if $gBitUser->isRegistered() && (empty($serviceHash.recommends_changes) || $serviceHash.recommends_changes < $gBitSystem->getConfig('recommends_max_changes', 1)) && (empty($serviceHash.recommends_time) || $serviceHash.recommends_time > $recommends_user_timeout) && (empty($recommends_timeout) || $serviceHash.created > $recommends_timeout) }
 		<ul class="recommends-recommending" id="recommends-current" onmouseover="flip('recommends-doit1');flip('recommends-doit3');flip('recommends-doit2');flip('recommends-doit4');" onmouseout="flip('recommends-doit1');flip('recommends-doit2');flip('recommends-doit3');flip('recommends-doit4');">
 			<li>
 				<a id="recommends-doit1" style="display:none" href="{$upurl}" >{biticon ipackage="recommends" iname=$up_icon iexplain="{tr}I Recommend{/tr}" iforce="icon"}</a>&nbsp;
