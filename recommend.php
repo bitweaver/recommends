@@ -1,9 +1,9 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_recommends/recommend.php,v 1.3 2007/03/28 22:57:57 nickpalmer Exp $
+* $Header: /cvsroot/bitweaver/_bit_recommends/recommend.php,v 1.4 2007/07/10 16:58:21 squareing Exp $
 * date created 2006/02/10
 * @author xing <xing@synapse.plus.com>
-* @version $Revision: 1.3 $ $Date: 2007/03/28 22:57:57 $
+* @version $Revision: 1.4 $ $Date: 2007/07/10 16:58:21 $
 * @package recommends
 */
 
@@ -40,7 +40,7 @@ if( @BitBase::verifyId( $_REQUEST['content_id'] ) && isset( $_REQUEST['recommend
 	$recommendsfeed['error'] = array('recommending_bad' => tra( "There was a problem trying to recommend." ));
 }
 $gBitSmarty->assign( "recommendsfeed", $recommendsfeed );
-if( $gBitSystem->isAjaxRequest() ) {
+if( $gBitThemes->isAjaxRequest() ) {
 	echo ( $gBitSmarty->fetch( 'bitpackage:recommends/recommends_inline_service.tpl' ) );
 } elseif( !empty( $tmpObject ) ) {
 	header( "Location:".$tmpObject->getDisplayUrl() );

@@ -1,9 +1,9 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_recommends/rate.php,v 1.2 2007/03/28 15:18:35 nickpalmer Exp $
+* $Header: /cvsroot/bitweaver/_bit_recommends/rate.php,v 1.3 2007/07/10 16:58:21 squareing Exp $
 * date created 2006/02/10
 * @author xing <xing@synapse.plus.com>
-* @version $Revision: 1.2 $ $Date: 2007/03/28 15:18:35 $
+* @version $Revision: 1.3 $ $Date: 2007/07/10 16:58:21 $
 * @package stars
 */
 
@@ -41,7 +41,7 @@ if( @BitBase::verifyId( $_REQUEST['content_id'] ) && @BitBase::verifyId( $_REQUE
 }
 $gBitSmarty->assign( "starsfeed", $starsfeed );
 
-if( $gBitSystem->isAjaxRequest() ) {
+if( $gBitThemes->isAjaxRequest() ) {
 	echo $gBitSmarty->fetch( 'bitpackage:stars/stars_inline_service.tpl' );
 } elseif( !empty( $tmpObject ) ) {
 	header( "Location:".$tmpObject->getDisplayUrl() );
