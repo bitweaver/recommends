@@ -1,9 +1,9 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_recommends/LibertyRecommends.php,v 1.11 2007/07/10 19:01:43 squareing Exp $
+* $Header: /cvsroot/bitweaver/_bit_recommends/LibertyRecommends.php,v 1.12 2007/09/23 19:36:23 nickpalmer Exp $
 * date created 2006/02/10
 * @author xing <xing@synapse.plus.com>
-* @version $Revision: 1.11 $ $Date: 2007/07/10 19:01:43 $
+* @version $Revision: 1.12 $ $Date: 2007/09/23 19:36:23 $
 * @package recommends
 */
 
@@ -418,7 +418,7 @@ function recommends_content_list_sql( &$pObject ) {
  * @return TRUE on success, FALSE on failure - mErrors will contain reason for failure
  */
 function recommends_content_load_sql( &$pObject ) {
-	global $gBitSystem, $gBitUser, $gBitSmarty;
+	global $gBitSystem, $gBitThemes, $gBitUser, $gBitSmarty;
 	if( $gBitSystem->isFeatureActive( 'recommends_recommend_'.$pObject->getContentType() ) ) {
 		if( $gBitSystem->isFeatureActive( 'recommends_use_ajax' ) ) {
 			$gBitThemes->loadAjax( 'prototype' );
