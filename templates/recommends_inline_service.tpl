@@ -14,21 +14,21 @@
 {assign var=divid value="recommends-display-`$serviceHash.content_id`"}
 {capture assign="upurl"}
 {if $gBitSystem->isFeatureActive( 'recommends_use_ajax' )}
-javascript:ajax_updater($('{$divid}'), '{$smarty.const.RECOMMENDS_PKG_URL}recommend.php', 'content_id={$serviceHash.content_id}&amp;recommends_recommending=1' );
+javascript:BitAjax.updater($('{$divid}'), '{$smarty.const.RECOMMENDS_PKG_URL}recommend.php', 'content_id={$serviceHash.content_id}&amp;recommends_recommending=1' );
 {else}
 {$smarty.const.RECOMMENDS_PKG_URL}recommend.php?content_id={$serviceHash.content_id}&amp;recommends_recommending=1
 {/if}
 {/capture}
 {capture assign="downurl"}
 {if $gBitSystem->isFeatureActive( 'recommends_use_ajax' )}
-javascript:ajax_updater($('{$divid}'), '{$smarty.const.RECOMMENDS_PKG_URL}recommend.php', 'content_id={$serviceHash.content_id}&amp;recommends_recommending=-1' );
+javascript:BitAjax.updater($('{$divid}'), '{$smarty.const.RECOMMENDS_PKG_URL}recommend.php', 'content_id={$serviceHash.content_id}&amp;recommends_recommending=-1' );
 {else}
 {$smarty.const.RECOMMENDS_PKG_URL}recommend.php?content_id={$serviceHash.content_id}&amp;recommends_recommending=-1
 {/if}
 {/capture}
 {capture assign="clearurl"}
 {if $gBitSystem->isFeatureActive( 'recommends_use_ajax' )}
-javascript:ajax_updater($('{$divid}'), '{$smarty.const.RECOMMENDS_PKG_URL}recommend.php', 'content_id={$serviceHash.content_id}&amp;recommends_recommending=0' );
+javascript:BitAjax.updater($('{$divid}'), '{$smarty.const.RECOMMENDS_PKG_URL}recommend.php', 'content_id={$serviceHash.content_id}&amp;recommends_recommending=0' );
 {else}
 {$smarty.const.RECOMMENDS_PKG_URL}recommend.php?content_id={$serviceHash.content_id}&amp;recommends_recommending=0
 {/if}
