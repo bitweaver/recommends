@@ -17,16 +17,19 @@ $gBitSmarty->assign( 'recommendedContent', $recommendedContent );
 $gBitSmarty->assign( 'listInfo', $listHash['listInfo'] );
 $contentType = 'Content';
 $contentTypes = array( '' => 'All Content' );
+$contentSelect = '';
 foreach( $gLibertySystem->mContentTypes as $cType ) {
 	if( $gBitSystem->isFeatureActive( 'recommends_recommend_'.$cType['content_type_guid'] ) ) {
 		$contentTypes[$cType['content_type_guid']] = $cType['content_description'];
 		if (isset($_REQUEST['content_type']) && $_REQUEST['content_type'] == $cType['content_type_guid']){
 			$contentType = $cType['content_description']."s";
+			$contentSelect = $cType['content_type_guid'];
 		}
 	}
 }
 $gBitSmarty->assign( 'recommendContentTypes', $contentTypes );
 $gBitSmarty->assign_by_ref( 'listInfo', $_REQUEST['listInfo'] ); 
 $gBitSmarty->assign( 'contentType', $contentType);
+$gBitSmarty->assign( 'contentSelect', $contentSelect);
 $gBitSystem->display( 'bitpackage:recommends/recommended.tpl', tra( 'Recommended Content' ) );
 ?>

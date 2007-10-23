@@ -1,9 +1,9 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_recommends/LibertyRecommends.php,v 1.13 2007/10/10 18:07:18 wjames5 Exp $
+* $Header: /cvsroot/bitweaver/_bit_recommends/LibertyRecommends.php,v 1.14 2007/10/23 14:27:33 nickpalmer Exp $
 * date created 2006/02/10
 * @author xing <xing@synapse.plus.com>
-* @version $Revision: 1.13 $ $Date: 2007/10/10 18:07:18 $
+* @version $Revision: 1.14 $ $Date: 2007/10/23 14:27:33 $
 * @package recommends
 */
 
@@ -21,7 +21,7 @@ define('RECOMMENDS_TIMEOUT_DAYS_SCALE', 86400); // 24 * 60 * 60
  * 
  * @package recommends
  */
-class LibertyRecommends extends LibertyBase {
+class LibertyRecommends extends LibertyContent {
 	var $mContentId;
 
 	/**
