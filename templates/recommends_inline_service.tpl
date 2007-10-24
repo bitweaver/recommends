@@ -12,32 +12,32 @@
 {capture assign="down_icon"}down{$icon_size}{/capture}
 {capture assign="clear_icon"}clear{$icon_size}{/capture}
 {assign var=divid value="recommends-display-`$serviceHash.content_id`"}
-{capture assign="upurl"}
+{capture assign="upaction"}
 {if $gBitSystem->isFeatureActive( 'recommends_use_ajax' )}
-javascript:BitAjax.updater($('{$divid}'), '{$smarty.const.RECOMMENDS_PKG_URL}recommend.php', 'content_id={$serviceHash.content_id}&amp;recommends_recommending=1' );
+href="javascript:void(0);" onclick="javascript:BitAjax.updater($('{$divid}'), '{$smarty.const.RECOMMENDS_PKG_URL}recommend.php', 'content_id={$serviceHash.content_id}&amp;recommends_recommending=1' );"
 {else}
-{$smarty.const.RECOMMENDS_PKG_URL}recommend.php?content_id={$serviceHash.content_id}&amp;recommends_recommending=1
+href="{$smarty.const.RECOMMENDS_PKG_URL}recommend.php?content_id={$serviceHash.content_id}&amp;recommends_recommending=1"
 {/if}
 {/capture}
-{capture assign="downurl"}
+{capture assign="downaction"}
 {if $gBitSystem->isFeatureActive( 'recommends_use_ajax' )}
-javascript:BitAjax.updater($('{$divid}'), '{$smarty.const.RECOMMENDS_PKG_URL}recommend.php', 'content_id={$serviceHash.content_id}&amp;recommends_recommending=-1' );
+href="javascript:void()" onclick="javascript:BitAjax.updater($('{$divid}'), '{$smarty.const.RECOMMENDS_PKG_URL}recommend.php', 'content_id={$serviceHash.content_id}&amp;recommends_recommending=-1' );"
 {else}
-{$smarty.const.RECOMMENDS_PKG_URL}recommend.php?content_id={$serviceHash.content_id}&amp;recommends_recommending=-1
+href="javascript:void(0);" onclick="{$smarty.const.RECOMMENDS_PKG_URL}recommend.php?content_id={$serviceHash.content_id}&amp;recommends_recommending=-1"
 {/if}
 {/capture}
-{capture assign="clearurl"}
+{capture assign="clearaction"}
 {if $gBitSystem->isFeatureActive( 'recommends_use_ajax' )}
-javascript:BitAjax.updater($('{$divid}'), '{$smarty.const.RECOMMENDS_PKG_URL}recommend.php', 'content_id={$serviceHash.content_id}&amp;recommends_recommending=0' );
+href="javascript:void(0);" href="javascript:BitAjax.updater($('{$divid}'), '{$smarty.const.RECOMMENDS_PKG_URL}recommend.php', 'content_id={$serviceHash.content_id}&amp;recommends_recommending=0' );"
 {else}
-{$smarty.const.RECOMMENDS_PKG_URL}recommend.php?content_id={$serviceHash.content_id}&amp;recommends_recommending=0
+href="{$smarty.const.RECOMMENDS_PKG_URL}recommend.php?content_id={$serviceHash.content_id}&amp;recommends_recommending=0"
 {/if}
 {/capture}
 	<div class="recommends-container" id="{$divid}" >				
 	{if $gBitUser->isRegistered() && (empty($serviceHash.recommends_changes) || $serviceHash.recommends_changes < $gBitSystem->getConfig('recommends_max_changes', 1)) && (empty($serviceHash.recommends_time) || $serviceHash.recommends_time > $recommends_user_timeout) && (empty($recommends_timeout) || $serviceHash.created > $recommends_timeout) }
 		<ul class="recommends-recommending" id="recommends-current" onmouseover="flip('recommends-doit1');flip('recommends-doit3');flip('recommends-doit2');flip('recommends-doit4');" onmouseout="flip('recommends-doit1');flip('recommends-doit2');flip('recommends-doit3');flip('recommends-doit4');">
 			<li>
-				<a id="recommends-doit1" style="display:none" href="{$upurl}" >{biticon ipackage="recommends" iname=$up_icon iexplain="{tr}I Recommend{/tr}" iforce="icon"}</a>&nbsp;
+				<a id="recommends-doit1" style="display:none" {$upaction} >{biticon ipackage="recommends" iname=$up_icon iexplain="{tr}I Recommend{/tr}" iforce="icon"}</a>&nbsp;
 			</li>
 			<li>				
 				<span id="recommends-doit3">
@@ -51,11 +51,11 @@ javascript:BitAjax.updater($('{$divid}'), '{$smarty.const.RECOMMENDS_PKG_URL}rec
 					{biticon ipackage="recommends" iname=$clear_icon alt="Needs Recommendations"}
 				{/if}
 				</span>
-				<a href="{$clearurl}" id="recommends-doit4" style="display:none">{biticon ipackage="recommends" iname=$clear_icon alt="Needs Recommendations"}</a>
+				<a {$clearaction} id="recommends-doit4" style="display:none">{biticon ipackage="recommends" iname=$clear_icon alt="Needs Recommendations"}</a>
 				&nbsp;
 			</li>
 			<li>
-				<a id="recommends-doit2" style="display:none" href="{$downurl}" >{biticon ipackage="recommends" iname=$down_icon iexplain="{tr}I Dislike{/tr}" iforce="icon"}</a>&nbsp;
+				<a id="recommends-doit2" style="display:none" {$downaction} >{biticon ipackage="recommends" iname=$down_icon iexplain="{tr}I Dislike{/tr}" iforce="icon"}</a>&nbsp;
 			</li>
 		</ul>
 		<div id="recommends-errors" class="row small">
