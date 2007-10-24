@@ -21,9 +21,9 @@ href="{$smarty.const.RECOMMENDS_PKG_URL}recommend.php?content_id={$serviceHash.c
 {/capture}
 {capture assign="downaction"}
 {if $gBitSystem->isFeatureActive( 'recommends_use_ajax' )}
-href="javascript:void()" onclick="javascript:BitAjax.updater($('{$divid}'), '{$smarty.const.RECOMMENDS_PKG_URL}recommend.php', 'content_id={$serviceHash.content_id}&amp;recommends_recommending=-1' );"
+href="javascript:void(0)" onclick="javascript:BitAjax.updater($('{$divid}'), '{$smarty.const.RECOMMENDS_PKG_URL}recommend.php', 'content_id={$serviceHash.content_id}&amp;recommends_recommending=-1' );"
 {else}
-href="javascript:void(0);" onclick="{$smarty.const.RECOMMENDS_PKG_URL}recommend.php?content_id={$serviceHash.content_id}&amp;recommends_recommending=-1"
+href="{$smarty.const.RECOMMENDS_PKG_URL}recommend.php?content_id={$serviceHash.content_id}&amp;recommends_recommending=-1"
 {/if}
 {/capture}
 {capture assign="clearaction"}
