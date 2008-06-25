@@ -31,5 +31,5 @@ $gBitSmarty->assign( 'recommendContentTypes', $contentTypes );
 $gBitSmarty->assign_by_ref( 'listInfo', $_REQUEST['listInfo'] ); 
 $gBitSmarty->assign( 'contentType', $contentType);
 $gBitSmarty->assign( 'contentSelect', $contentSelect);
-$gBitSystem->display( 'bitpackage:recommends/recommended.tpl', tra( 'Recommended Content' ) );
+$gBitSystem->display( 'bitpackage:recommends/recommended.tpl', tra( 'Recommended Content' ) , array( 'display_mode' => 'display' ));
 ?>
