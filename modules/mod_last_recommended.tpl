@@ -1,7 +1,7 @@
 {strip}
 {if $gBitSystem->isPackageActive( 'recommends' )}
 	{bitmodule title="$moduleTitle" name="last_recommended"}
-		<ul class="data">
+		<ul>
 			{section name=ix loop=$modLastRecommends}
 				<li class="{cycle values="odd,even"}">
 					<div class="title"><a href="{$modLastRecommends[ix].display_url}">{$modLastRecommends[ix].title}</a></div>
