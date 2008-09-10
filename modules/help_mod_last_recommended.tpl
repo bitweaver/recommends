@@ -7,7 +7,8 @@
 <dl>
 	<dt class="param"><kbd>content_type</kbd></dt>
 	<dd><em>{tr}String{/tr}</em></dd>
-	
+
 	<dt class="param"><kbd>max_preview_length</kbd></dt>
-	<dd><abbr class="default" title="default">100<abbr>, <em>{tr}Numeric{/tr}</em></dd>
+	<dd><em>{tr}Numeric{/tr}</em></dd>
+	<dd><abbr class="default" title="default">100</abbr></dd>
 </dl>
