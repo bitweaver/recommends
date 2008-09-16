@@ -10,5 +10,5 @@
 
 	<dt class="param"><kbd>max_preview_length</kbd></dt>
 	<dd><em>{tr}Numeric{/tr}</em></dd>
-	<dd><abbr class="default" title="default">100</abbr></dd>
+	<dd><abbr class="default" title="{tr}default{/tr}">100</abbr></dd>
 </dl>
