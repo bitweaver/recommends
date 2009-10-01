@@ -1,8 +1,8 @@
 <?php
-// $Header: /cvsroot/bitweaver/_bit_recommends/admin/admin_recommends_inc.php,v 1.5 2007/07/03 16:43:05 nickpalmer Exp $
+// $Header: /cvsroot/bitweaver/_bit_recommends/admin/admin_recommends_inc.php,v 1.6 2009/10/01 13:45:47 wjames5 Exp $
 // Copyright (c) 2005 bitweaver Recommends
 // All Rights Reserved. See copyright.txt for details and a complete list of authors.
-// Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See license.txt for details.
+// Licensed under the GNU LESSER GENERAL PUBLIC LICENSE. See http://www.gnu.org/copyleft/lesser.html for details.
 
 require_once( RECOMMENDS_PKG_PATH.'LibertyRecommends.php' );
 $gBitSmarty->assign_by_ref( 'feedback', $feedback = array() );
