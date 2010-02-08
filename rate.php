@@ -1,16 +1,16 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_recommends/rate.php,v 1.3 2007/07/10 16:58:21 squareing Exp $
+* $Header: /cvsroot/bitweaver/_bit_recommends/rate.php,v 1.4 2010/02/08 21:27:25 wjames5 Exp $
 * date created 2006/02/10
 * @author xing <xing@synapse.plus.com>
-* @version $Revision: 1.3 $ $Date: 2007/07/10 16:58:21 $
+* @version $Revision: 1.4 $ $Date: 2010/02/08 21:27:25 $
 * @package stars
 */
 
 /**
  * Setup
  */
-require_once( "../bit_setup_inc.php" );
+require_once( "../kernel/setup_inc.php" );
 $gBitSystem->verifyPackage( 'stars' );
 $starsfeed = array();
 

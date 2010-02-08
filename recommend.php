@@ -1,16 +1,16 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_recommends/recommend.php,v 1.4 2007/07/10 16:58:21 squareing Exp $
+* $Header: /cvsroot/bitweaver/_bit_recommends/recommend.php,v 1.5 2010/02/08 21:27:25 wjames5 Exp $
 * date created 2006/02/10
 * @author xing <xing@synapse.plus.com>
-* @version $Revision: 1.4 $ $Date: 2007/07/10 16:58:21 $
+* @version $Revision: 1.5 $ $Date: 2010/02/08 21:27:25 $
 * @package recommends
 */
 
 /**
  * Setup
  */
-require_once( "../bit_setup_inc.php" );
+require_once( "../kernel/setup_inc.php" );
 $gBitSystem->verifyPackage( 'recommends' );
 $recommendsfeed = array();
 
