@@ -50,4 +50,8 @@ $gBitInstaller->registerPreferences( RECOMMENDS_PKG_NAME, array(
 	array( RECOMMENDS_PKG_NAME, "recommends_minimum_recommends", "10" ),
 	array( RECOMMENDS_PKG_NAME, "recommends_icon_width", "48" ),
 ) );
-?>
+
+// Requirements
+$gBitInstaller->registerRequirements( RECOMMENDS_PKG_NAME, array(
+    'liberty' => array( 'min' => '2.1.4' ),
+));

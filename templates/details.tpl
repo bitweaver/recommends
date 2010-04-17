@@ -9,7 +9,7 @@
 				<div class="row">
 					{formlabel label="Title"}
 					{forminput}
-					<a href="{$recommendsDetails.display_url}">{$recommendsDetails.title|escape}</a> <small>({$recommendsDetails.content_type.content_description})</small>
+					<a href="{$recommendsDetails.display_url}">{$recommendsDetails.title|escape}</a> <small>({$gLibertySystem->getContentTypeName($recommendsDetails.content_type_guid)})</small>
 					{/forminput}
 				</div>
 
