@@ -20,9 +20,9 @@ $contentTypes = array( '' => 'All Content' );
 $contentSelect = '';
 foreach( $gLibertySystem->mContentTypes as $cType ) {
 	if( $gBitSystem->isFeatureActive( 'recommends_recommend_'.$cType['content_type_guid'] ) ) {
-		$contentTypes[$cType['content_type_guid']] = $cType['content_description'];
+		$contentTypes[$cType['content_type_guid']] = $gLibertySystem->getContentTypeName( $cType['content_type_guid'] );
 		if (isset($_REQUEST['content_type']) && $_REQUEST['content_type'] == $cType['content_type_guid']){
-			$contentType = $cType['content_description']."s";
+			$contentType = $gLibertySystem->getContentTypeName( $cType['content_type_guid'], TRUE );
 			$contentSelect = $cType['content_type_guid'];
 		}
 	}
