@@ -1,6 +1,6 @@
 <?php
 /**
- * @version $Header: /cvsroot/bitweaver/_bit_recommends/modules/mod_last_recommended.php,v 1.6 2007/06/22 10:16:46 lsces Exp $
+ * @version $Header$
  * @package recommends
  * @subpackage modules
  */

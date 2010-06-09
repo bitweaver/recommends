@@ -1,9 +1,9 @@
 <?php
 /**
-* $Header: /cvsroot/bitweaver/_bit_recommends/LibertyRecommends.php,v 1.14 2007/10/23 14:27:33 nickpalmer Exp $
+* $Header$
 * date created 2006/02/10
 * @author xing <xing@synapse.plus.com>
-* @version $Revision: 1.14 $ $Date: 2007/10/23 14:27:33 $
+* @version $Revision$
 * @package recommends
 */
 
