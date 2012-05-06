@@ -31,8 +31,8 @@ class LibertyRecommends extends LibertyContent {
 	 * @access public
 	 * @return void
 	 */
-	function LibertyRecommends( $pContentId=NULL ) {
-		LibertyBase::LibertyBase();
+	function __construct( $pContentId=NULL ) {
+		parent::__construct();
 		$this->mContentId = $pContentId;
 	}
 
