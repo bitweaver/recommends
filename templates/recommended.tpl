@@ -6,7 +6,7 @@
 	</div>
 	<div class="body">
 	{form legend="Select Content Type"}
-		<div class="row">
+		<div class="control-group">
 			{formlabel label="Restrict listing" for="content_type"}
 			{forminput}
 				{html_options onchange="submit();" options=$recommendContentTypes name=content_type id=content_type selected=$contentSelect}

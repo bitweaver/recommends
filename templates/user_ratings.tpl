@@ -1,6 +1,6 @@
 {strip}
 {if $average_pixels}
-	<div class="row">
+	<div class="control-group">
 		{formlabel label="Average Rating" for=""}
 		{forminput}
 			<div class="stars-container">
