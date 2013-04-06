@@ -8,7 +8,7 @@
 			<input type="hidden" name="page" value="{$page}" />
 			{foreach from=$formRecommendsOptions key=item item=output}
 				<div class="control-group">
-					{formlabel label=`$output.label` for=$item}
+					{formlabel label=$output.label for=$item}
 					{forminput}
 						{if $output.type == 'numeric'}
 							{html_options name="$item" values=$numbers output=$numbers selected=$gBitSystem->getConfig($item) labels=false id=$item}
@@ -17,7 +17,7 @@
 						{else}
 							{html_checkboxes name="$item" values="y" checked=$gBitSystem->getConfig($item) labels=false id=$item}
 						{/if}
-						{formhelp note=`$output.note` page=`$output.page`}
+						{formhelp note=$output.note page=$output.page}
 					{/forminput}
 				</div>
 			{/foreach}
@@ -45,7 +45,7 @@
 			<input type="hidden" name="page" value="{$page}" />
 			{foreach from=$formRecommendsDisplayOptions key=item item=output}
 				<div class="control-group">
-					{formlabel label=`$output.label` for=$item}
+					{formlabel label=$output.label for=$item}
 					{forminput}
 						{if $output.type == 'numeric'}
 							{html_options name="$item" values=$numbers output=$numbers selected=$gBitSystem->getConfig($item) labels=false id=$item}
@@ -54,7 +54,7 @@
 						{else}
 							{html_checkboxes name="$item" values="y" checked=$gBitSystem->getConfig($item) labels=false id=$item}
 						{/if}
-						{formhelp note=`$output.note` page=`$output.page`}
+						{formhelp note=$output.note page=$output.page}
 					{/forminput}
 				</div>
 			{/foreach}
