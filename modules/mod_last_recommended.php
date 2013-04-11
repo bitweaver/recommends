@@ -23,6 +23,6 @@ $listHash = array(
 	'recommends'   => $gBitSystem->getConfig( 'recommends_minimum_recommends', '10' ),
 );
 $recommend = new LibertyRecommends();
-$gBitSmarty->assign( 'modLastRecommends', $recommend->getList( $listHash ));
-$gBitSmarty->assign( 'maxPreviewLength', ( !empty( $modParams['max_preview_length'] ) ? $modParams['max_preview_length'] : 100 ));
+$_template->tpl_vars['modLastRecommends'] = new Smarty_variable( $recommend->getList( $listHash );
+$_template->tpl_vars['maxPreviewLength'] = new Smarty_variable( ( !empty( $modParams['max_preview_length'] );
 ?>
