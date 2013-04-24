@@ -26,7 +26,7 @@
 			<input type="hidden" name="offset" value="{$control.offset|escape}" />
 			<input type="hidden" name="sort_mode" value="{$control.sort_mode|escape}" />
 
-			<table class="data">
+			<table class="table data">
 				<tr>
 					<th>{smartlink ititle="Title" isort=title offset=$control.offset iorder=desc idefault=0}</th>
 					<th>{smartlink ititle="Recommendation Level" isort=recommending offset=$control.offset iorder=desc idefault=1}</th>
