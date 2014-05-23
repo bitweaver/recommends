@@ -63,7 +63,7 @@
 	{/jstabs}
 
 	<div class="control-group submit">
-		<input type="submit" class="btn" name="recommends_preferences" value="{tr}Change preferences{/tr}" />
+		<input type="submit" class="btn btn-default" name="recommends_preferences" value="{tr}Change preferences{/tr}" />
 	</div>
 {/form}
 {smartlink ititle="View a list of recommended content" ipackage=recommends ifile="index.php"}
