@@ -1,6 +1,6 @@
 {strip}
 {if $userAverage}
-	<div class="control-group">
+	<div class="form-group">
 		{formlabel label="Recommendation Percentage" for=""}
 		{forminput}
 			{$userAverage}% Recommends

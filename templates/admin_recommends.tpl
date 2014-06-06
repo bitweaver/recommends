@@ -7,7 +7,7 @@
 		{legend legend="Generic Settings"}
 			<input type="hidden" name="page" value="{$page}" />
 			{foreach from=$formRecommendsOptions key=item item=output}
-				<div class="control-group">
+				<div class="form-group">
 					{formlabel label=$output.label for=$item}
 					{forminput}
 						{if $output.type == 'numeric'}
@@ -22,7 +22,7 @@
 				</div>
 			{/foreach}
 	
-			<div class="control-group">
+			<div class="form-group">
 				{formlabel label="Icon Size"}
 				{forminput}
 					{html_options name="recommends_icon_width" options=$recommendsIconSizes selected=$gBitSystem->getConfig('recommends_icon_width')}
@@ -30,7 +30,7 @@
 				{/forminput}
 			</div>
 	
-			<div class="control-group">
+			<div class="form-group">
 				{formlabel label="Recommendable Content"}
 				{forminput}
 					{html_checkboxes options=$formRecommendable.guids value=y name=recommendable_content separator="<br />" checked=$formRecommendable.checked}
@@ -44,7 +44,7 @@
 		{legend legend="Display Settings"}
 			<input type="hidden" name="page" value="{$page}" />
 			{foreach from=$formRecommendsDisplayOptions key=item item=output}
-				<div class="control-group">
+				<div class="form-group">
 					{formlabel label=$output.label for=$item}
 					{forminput}
 						{if $output.type == 'numeric'}
@@ -62,7 +62,7 @@
 		{/jstab}
 	{/jstabs}
 
-	<div class="control-group submit">
+	<div class="form-group submit">
 		<input type="submit" class="btn btn-default" name="recommends_preferences" value="{tr}Change preferences{/tr}" />
 	</div>
 {/form}

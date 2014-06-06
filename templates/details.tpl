@@ -6,42 +6,42 @@
 	<div class="body">
 		{legend legend="Recommends Details"}
 			{if $recommendsDetails}
-				<div class="control-group">
+				<div class="form-group">
 					{formlabel label="Title"}
 					{forminput}
 					<a href="{$recommendsDetails.display_url}">{$recommendsDetails.title|escape}</a> <small>({$gLibertySystem->getContentTypeName($recommendsDetails.content_type_guid)})</small>
 					{/forminput}
 				</div>
 
-				<div class="control-group">
+				<div class="form-group">
 					{formlabel label="Creator"}
 					{forminput}
 						{displayname real_name=$recommendsDetails.creator_real_name login=$recommendsDetails.creator_user}
 					{/forminput}
 				</div>
 
-				<div class="control-group">
+				<div class="form-group">
 					{formlabel label="Last Editor"}
 					{forminput}
 						{displayname real_name=$recommendsDetails.modifier_real_name login=$recommendsDetails.modifier_user}
 					{/forminput}
 				</div>
 
-				<div class="control-group">
+				<div class="form-group">
 					{formlabel label="Recommendation Level"}
 					{forminput}
 						{$recommendsDetails.recommends_recommending}
 					{/forminput}
 				</div>
 
-				<div class="control-group">
+				<div class="form-group">
 					{formlabel label="Number of recommends"}
 					{forminput}
 						{$recommendsDetails.recommends_votes}
 					{/forminput}
 				</div>
 
-				<div class="control-group">
+				<div class="form-group">
 					{formlabel label="Users who have recommended"}
 					{forminput}
 						<ul class="data">
@@ -56,7 +56,7 @@
 			{elseif $userRecommendings}
 				{include file="bitpackage:recommends/user_recommendings.tpl"}
 
-				<div class="control-group">
+				<div class="form-group">
 					{formlabel label="Individual Recommendings" for=""}
 					{forminput}
 						<ul class="data">
